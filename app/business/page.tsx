@@ -3,9 +3,14 @@
 import { useState, useRef } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle, BarChart, Users, Store, Shield, Zap, Mail, Loader2, TrendingUp, CreditCard, Package, MessageCircle, Star, Building2, UserPlus, DollarSign } from 'lucide-react'
+import { 
+  ArrowRight, CheckCircle, BarChart, Users, Store, Shield, Zap, Mail, Loader2, 
+  TrendingUp, CreditCard, Package, MessageCircle, Building2, UserPlus, DollarSign,
+  Sparkles, Lock, Globe
+} from 'lucide-react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import WaitlistForm from '@/components/WaitlistForm'
 
 export default function BusinessPage() {
   const [email, setEmail] = useState('')
@@ -66,55 +71,201 @@ export default function BusinessPage() {
     <>
       <Header />
       <main>
-        {/* Hero */}
-        <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+        {/* Hero - Fixed spacing */}
+        <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-20">
           <div className="absolute inset-0 bg-grid opacity-30" />
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />
-          <div className="relative max-w-7xl mx-auto px-6 py-20 text-center">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 bg-purple-50 text-purple-600 px-4 py-2 rounded-full text-sm font-medium mb-8"><Building2 className="h-4 w-4" /> For Businesses</motion.div>
-            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">Sell to <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Nigerian students</span></motion.h1>
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="text-xl text-slate-500 mb-8 max-w-2xl mx-auto">Reach thousands of students across Nigerian universities. List unlimited items, get your own store page, and track your sales.</motion.p>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6 }} className="max-w-md mx-auto">
+          <div className="relative max-w-7xl mx-auto px-6 py-16 text-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 bg-purple-50 text-purple-600 px-4 py-2 rounded-full text-sm font-medium mb-8">
+              <Building2 className="h-4 w-4" /> For Businesses <Sparkles className="h-3 w-3" />
+            </motion.div>
+            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
+              Sell to <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Nigerian students</span>
+            </motion.h1>
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="text-xl text-slate-500 mb-8 max-w-2xl mx-auto">
+              Reach thousands of students across Nigerian universities. List unlimited items, get your own store page, and track your sales.
+            </motion.p>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6 }} className="max-w-md mx-auto" id="waitlist">
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="relative"><Building2 className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 h-5 w-5" /><input type="text" value={businessName} onChange={(e) => setBusinessName(e.target.value)} placeholder="Business name" className="w-full pl-12 pr-4 py-3 border-2 border-slate-200 rounded-xl focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 transition" required /></div>
-                <div className="relative"><Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 h-5 w-5" /><input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Business email" className="w-full pl-12 pr-4 py-3 border-2 border-slate-200 rounded-xl focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 transition" required /></div>
-                <button type="submit" disabled={isLoading} className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition disabled:opacity-50 flex items-center justify-center gap-2 group">{isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>Join waitlist for Business <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" /></>}</button>
+                <div className="relative">
+                  <Building2 className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 h-5 w-5" />
+                  <input 
+                    type="text" 
+                    value={businessName} 
+                    onChange={(e) => setBusinessName(e.target.value)} 
+                    placeholder="Business name" 
+                    className="w-full pl-12 pr-4 py-3 border-2 border-slate-200 rounded-xl focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 transition" 
+                    required 
+                  />
+                </div>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 h-5 w-5" />
+                  <input 
+                    type="email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    placeholder="Business email" 
+                    className="w-full pl-12 pr-4 py-3 border-2 border-slate-200 rounded-xl focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 transition" 
+                    required 
+                  />
+                </div>
+                <button 
+                  type="submit" 
+                  disabled={isLoading} 
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition disabled:opacity-50 flex items-center justify-center gap-2 group"
+                >
+                  {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>Join waitlist for Business <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" /></>}
+                </button>
               </form>
-              <p className="text-xs text-slate-400 text-center mt-4">No spam. We'll notify you when ready. First month free.</p>
+              <div className="mt-4 flex items-center justify-center gap-4 text-xs text-slate-400">
+                <span className="flex items-center gap-1"><Lock className="h-3 w-3" /> No spam</span>
+                <span className="w-1 h-1 bg-slate-300 rounded-full" />
+                <span className="flex items-center gap-1"><CheckCircle className="h-3 w-3" /> First month free</span>
+                <span className="w-1 h-1 bg-slate-300 rounded-full" />
+                <span className="flex items-center gap-1"><Globe className="h-3 w-3" /> Nigeria only</span>
+              </div>
             </motion.div>
           </div>
         </section>
 
-        {/* Stats */}
-        <section className="py-16 border-y border-slate-100 bg-slate-50/30">
-          <div className="max-w-7xl mx-auto px-6"><div className="grid md:grid-cols-4 gap-8">{[
-            { number: "10,000+", label: "Students reached" }, { number: "₦50M+", label: "Transaction volume" }, { number: "500+", label: "Daily listings" }, { number: "98%", label: "Seller satisfaction" }
-          ].map((stat, i) => (<motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }} className="text-center"><div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">{stat.number}</div><div className="text-slate-500 font-medium">{stat.label}</div></motion.div>))}</div></div>
+        {/* Benefits - Everything you need to grow */}
+        <section className="py-24">
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Everything you need to grow</h2>
+              <p className="text-xl text-slate-500">Built for businesses selling to students</p>
+            </motion.div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {benefits.map((benefit, i) => (
+                <motion.div 
+                  key={i} 
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -4 }} 
+                  className="group bg-white rounded-2xl p-6 border border-slate-100 hover:border-purple-200 hover:shadow-xl transition-all"
+                >
+                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                    <benefit.icon className="h-6 w-6 text-purple-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-slate-900 mb-2">{benefit.title}</h3>
+                  <p className="text-slate-500 text-sm">{benefit.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </section>
 
-        {/* Benefits */}
-        <section className="py-24"><div className="max-w-7xl mx-auto px-6"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Everything you need to grow</h2><p className="text-xl text-slate-500">Built for businesses selling to students</p></motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">{benefits.map((benefit, i) => (<motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }} whileHover={{ y: -4 }} className="group bg-white rounded-2xl p-6 border border-slate-100 hover:border-purple-200 hover:shadow-xl transition-all"><div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition"><benefit.icon className="h-6 w-6 text-purple-600" /></div><h3 className="text-lg font-semibold text-slate-900 mb-2">{benefit.title}</h3><p className="text-slate-500 text-sm">{benefit.description}</p></motion.div>))}</div></div>
-        </section>
-
-        {/* How It Works */}
-        <section className="py-24 bg-slate-50/30 border-y border-slate-100"><div className="max-w-7xl mx-auto px-6"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">How it works</h2><p className="text-xl text-slate-500">Get started in six simple steps</p></motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">{steps.map((step, i) => (<motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }} whileHover={{ y: -4 }} className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-lg transition-all"><div className="flex items-center justify-between mb-4"><div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center"><step.icon className="h-6 w-6 text-purple-600" /></div><span className="text-2xl font-bold text-purple-200">{step.step}</span></div><h3 className="text-lg font-semibold text-slate-900 mb-2">{step.title}</h3><p className="text-slate-500 text-sm mb-3">{step.description}</p><div className="flex items-center gap-2 text-sm text-purple-600 pt-3 border-t border-slate-100"><CheckCircle className="h-4 w-4" /><span>{step.detail}</span></div></motion.div>))}</div></div>
+        {/* How It Works - Detailed steps */}
+        <section className="py-24 bg-slate-50/30 border-y border-slate-100">
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">How it works</h2>
+              <p className="text-xl text-slate-500">Get started in six simple steps</p>
+            </motion.div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {steps.map((step, i) => (
+                <motion.div 
+                  key={i} 
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -4 }} 
+                  className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                      <step.icon className="h-6 w-6 text-purple-600" />
+                    </div>
+                    <span className="text-2xl font-bold text-purple-200">{step.step}</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-slate-900 mb-2">{step.title}</h3>
+                  <p className="text-slate-500 text-sm mb-3">{step.description}</p>
+                  <div className="flex items-center gap-2 text-sm text-purple-600 pt-3 border-t border-slate-100">
+                    <CheckCircle className="h-4 w-4" />
+                    <span>{step.detail}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* Pricing */}
-        <section className="py-24"><div className="max-w-7xl mx-auto px-6"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Simple, transparent pricing</h2><p className="text-xl text-slate-500">No hidden fees. No surprises.</p></motion.div>
-          <div className="max-w-4xl mx-auto"><motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 p-8 md:p-12 text-white text-center"><div className="absolute inset-0 bg-grid-white/5" /><div className="relative z-10"><div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm mb-6"><span>Limited time offer</span></div><div className="text-5xl md:text-6xl font-bold mb-2">₦10,000</div><div className="text-slate-300 mb-6">/month • First month free</div><div className="flex flex-wrap justify-center gap-4 mb-8"><span className="flex items-center gap-2 text-sm"><CheckCircle className="h-4 w-4 text-green-400" /> No setup fee</span><span className="flex items-center gap-2 text-sm"><CheckCircle className="h-4 w-4 text-green-400" /> Cancel anytime</span><span className="flex items-center gap-2 text-sm"><CheckCircle className="h-4 w-4 text-green-400" /> Free support</span></div><Link href="#waitlist" className="inline-flex items-center gap-2 bg-white text-slate-900 px-8 py-3 rounded-xl font-semibold hover:bg-slate-100 transition group">Join waitlist <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" /></Link></div></motion.div></div></div>
-        </section>
-
-        {/* Testimonials */}
-        <section className="py-24 bg-slate-50/30 border-y border-slate-100"><div className="max-w-7xl mx-auto px-6"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Trusted by businesses</h2><p className="text-xl text-slate-500">See what other sellers are saying</p></motion.div>
-          <div className="grid md:grid-cols-3 gap-6">{[{ name: "Emeka Okafor", business: "Tech Haven", text: "Business account paid for itself in the first week. Students are always looking for gadgets.", avatar: "E" },{ name: "Adaeze Nwosu", business: "Campus Fashion Hub", text: "The custom store page helped build our brand. Sales increased by 200% in 3 months.", avatar: "A" },{ name: "Tunde Adeyemi", business: "BookMaster NG", text: "Reaching students directly has been a game changer. No middlemen, just sales.", avatar: "T" }].map((t, i) => (<motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }} whileHover={{ y: -4 }} className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-lg transition"><div className="flex items-center gap-3 mb-4"><div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg">{t.avatar}</div><div><p className="font-semibold text-slate-900">{t.name}</p><p className="text-sm text-slate-500">{t.business}</p></div></div><div className="flex gap-1 mb-3">{[...Array(5)].map((_, j) => (<Star key={j} className="h-4 w-4 fill-yellow-400 text-yellow-400" />))}</div><p className="text-slate-600 italic">"{t.text}"</p></motion.div>))}</div></div>
+        <section className="py-24">
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Simple, transparent pricing</h2>
+              <p className="text-xl text-slate-500">No hidden fees. No surprises.</p>
+            </motion.div>
+            <div className="max-w-4xl mx-auto">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }} 
+                className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 p-8 md:p-12 text-white text-center"
+              >
+                <div className="absolute inset-0 bg-grid-white/5" />
+                <div className="relative z-10">
+                  <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm mb-6">
+                    <Sparkles className="h-4 w-4" /> Limited time offer
+                  </div>
+                  <div className="text-5xl md:text-6xl font-bold mb-2">₦10,000</div>
+                  <div className="text-slate-300 mb-6">/month • First month free</div>
+                  <div className="flex flex-wrap justify-center gap-4 mb-8">
+                    <span className="flex items-center gap-2 text-sm"><CheckCircle className="h-4 w-4 text-green-400" /> No setup fee</span>
+                    <span className="flex items-center gap-2 text-sm"><CheckCircle className="h-4 w-4 text-green-400" /> Cancel anytime</span>
+                    <span className="flex items-center gap-2 text-sm"><CheckCircle className="h-4 w-4 text-green-400" /> Free support</span>
+                  </div>
+                  <Link href="#waitlist" className="inline-flex items-center gap-2 bg-white text-slate-900 px-8 py-3 rounded-xl font-semibold hover:bg-slate-100 transition group">
+                    Join waitlist <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </section>
 
         {/* Final CTA */}
-        <section className="py-24"><div className="max-w-4xl mx-auto px-6 text-center"><motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-3xl p-12 text-white"><h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to reach Nigerian students?</h2><p className="text-purple-100 mb-8 max-w-lg mx-auto">Join the waitlist for early access. First month free.</p><Link href="#waitlist" className="inline-flex items-center gap-2 bg-white text-purple-600 px-8 py-3 rounded-xl font-semibold hover:bg-purple-50 transition group">Join business waitlist <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" /></Link></motion.div></div></section>
+        <section className="py-24">
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }} 
+              className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-3xl p-12 text-white"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to reach Nigerian students?</h2>
+              <p className="text-purple-100 mb-8 max-w-lg mx-auto">Join the waitlist for early access. First month free.</p>
+              <Link href="#waitlist" className="inline-flex items-center gap-2 bg-white text-purple-600 px-8 py-3 rounded-xl font-semibold hover:bg-purple-50 transition group">
+                Join business waitlist <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
+              </Link>
+            </motion.div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>

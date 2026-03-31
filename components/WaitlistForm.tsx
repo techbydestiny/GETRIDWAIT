@@ -83,7 +83,7 @@ export default function WaitlistForm() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Your university email"
+              placeholder="Your  Email"
               className="w-full pl-10 pr-4 py-3 border-2 border-slate-200 rounded-xl focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 transition"
               disabled={isLoading}
             />

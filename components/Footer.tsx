@@ -17,10 +17,7 @@ export default function Footer() {
     company: [
       { name: 'About Us', href: '/about' },
       { name: 'Contact', href: '/contact' },
-    ],
-    legal: [
-      { name: 'Privacy Policy', href: '/privacy' },
-      { name: 'Terms of Service', href: '/terms' },
+      { name: 'FAQ', href: '/faq' },
     ],
     social: [
       { name: 'Twitter', icon: FaTwitter, href: 'https://twitter.com/getridng' },
@@ -79,20 +76,6 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4">Company</h4>
             <ul className="space-y-2">
               {links.company.map((link, i) => (
-                <motion.li key={i} whileHover={{ x: 2 }}>
-                  <Link href={link.href} className="text-sm text-slate-400 hover:text-white transition flex items-center gap-1 group">
-                    {link.name}
-                    <ArrowUpRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition" />
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-white font-semibold mb-4">Legal</h4>
-            <ul className="space-y-2">
-              {links.legal.map((link, i) => (
                 <motion.li key={i} whileHover={{ x: 2 }}>
                   <Link href={link.href} className="text-sm text-slate-400 hover:text-white transition flex items-center gap-1 group">
                     {link.name}
